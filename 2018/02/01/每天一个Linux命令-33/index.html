@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/site/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"atompi.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Some old articles may have been deprecated.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一个 Linux 命令（33） -- tar">
+<meta property="og:url" content="https://atompi.github.io/2018/02/01/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-33/index.html">
+<meta property="og:site_name" content="atompi">
+<meta property="og:description" content="Some old articles may have been deprecated.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-14T23:42:55.529Z">
+<meta property="article:author" content="阿童木">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://atompi.github.io/2018/02/01/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-33/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://atompi.github.io/2018/02/01/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-33/","path":"2018/02/01/每天一个Linux命令-33/","title":"每天一个 Linux 命令（33） -- tar"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每天一个 Linux 命令（33） -- tar | atompi</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="atompi" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/images/site/logo.svg" alt="atompi">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">atompi</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#zip%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">zip格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar%E6%A0%BC%E5%BC%8F%EF%BC%88%E8%AF%A5%E6%A0%BC%E5%BC%8F%E4%BB%85%E4%BB%85%E6%89%93%E5%8C%85%EF%BC%8C%E4%B8%8D%E5%8E%8B%E7%BC%A9%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">tar格式（该格式仅仅打包，不压缩）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar-gz%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">tar.gz格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar-bz2%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.4.</span> <span class="nav-text">tar.bz2格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar-xz%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.5.</span> <span class="nav-text">tar.xz格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar-Z%E6%A0%BC%E5%BC%8F%EF%BC%88%E5%B7%B2%E8%BF%87%E6%97%B6%EF%BC%89"><span class="nav-number">5.6.</span> <span class="nav-text">tar.Z格式（已过时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jar%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.7.</span> <span class="nav-text">jar格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7z%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.8.</span> <span class="nav-text">7z格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E4%BE%8B%E5%AD%90"><span class="nav-number">5.9.</span> <span class="nav-text">其它例子</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿童木"
+      src="/images/site/avatar.jpg">
+  <p class="site-author-name" itemprop="name">阿童木</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/atompi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7573893/atompi" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7573893&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://atompi.github.io/2018/02/01/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-33/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/site/avatar.jpg">
+      <meta itemprop="name" content="阿童木">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="atompi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每天一个 Linux 命令（33） -- tar | atompi">
+      <meta itemprop="description" content="Some old articles may have been deprecated.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每天一个 Linux 命令（33） -- tar
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-02-02T00:00:00+08:00">2018-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-15 07:42:55" itemprop="dateModified" datetime="2024-10-15T07:42:55+08:00">2024-10-15</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Some old articles may have been deprecated.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Linux下的归档使用工具，用来打包和备份。</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>tar命令</strong> 可以为linux的文件和目录创建档案。利用tar，可以为某一特定文件创建档案（备份文件），也可以在档案中改变文件，或者向档案中加入新的文件。tar最初被用来在磁带上创建档案，现在，用户可以在任何设备上创建档案。利用tar命令，可以把一大堆的文件和目录全部打包成一个文件，这对于备份文件或将几个文件组合成为一个文件以便于网络传输是非常有用的。</p>
+<p>首先要弄清两个概念：打包和压缩。打包是指将一大堆文件或目录变成一个总的文件；压缩则是将一个大的文件通过一些压缩算法变成一个小文件。</p>
+<p>为什么要区分这两个概念呢？这源于Linux中很多压缩程序只能针对一个文件进行压缩，这样当你想要压缩一大堆文件时，你得先将这一大堆文件先打成一个包（tar命令），然后再用压缩程序进行压缩（gzip bzip2命令）。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar (选项) (参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-A或--catenate：新增文件到以存在的备份文件；</span><br><span class="line">-B：设置区块大小；</span><br><span class="line">-c或--create：建立新的备份文件；</span><br><span class="line">-C &amp;lt;目录&amp;gt;：这个选项用在解压缩，若要在特定目录解压缩，可以使用这个选项。</span><br><span class="line">-d：记录文件的差别；</span><br><span class="line">-x或--extract或--get：从备份文件中还原文件；</span><br><span class="line">-t或--list：列出备份文件的内容；</span><br><span class="line">-z或--gzip或--ungzip：通过gzip指令处理备份文件；</span><br><span class="line">-Z或--compress或--uncompress：通过compress指令处理备份文件；</span><br><span class="line">-f&amp;lt;备份文件&amp;gt;或--file=&amp;lt;备份文件&amp;gt;：指定备份文件；</span><br><span class="line">-v或--verbose：显示指令执行过程；</span><br><span class="line">-r：添加文件到已经压缩的文件；</span><br><span class="line">-u：添加改变了和现有的文件到已经存在的压缩文件；</span><br><span class="line">-j：支持bzip2解压文件；</span><br><span class="line">-v：显示操作过程；</span><br><span class="line">-l：文件系统边界设置；</span><br><span class="line">-k：保留原有文件不覆盖；</span><br><span class="line">-m：保留文件不被覆盖；</span><br><span class="line">-w：确认压缩文件的正确性；</span><br><span class="line">-p或--same-permissions：用原来的文件权限还原文件；</span><br><span class="line">-P或--absolute-names：文件名使用绝对名称，不移除文件名称前的“/”号；</span><br><span class="line">-N &amp;lt;日期格式&amp;gt; 或 --newer=&amp;lt;日期时间&amp;gt;：只将较指定日期更新的文件保存到备份文件里；</span><br><span class="line">--exclude=&amp;lt;范本样式&amp;gt;：排除符合范本样式的文件。</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件或目录：指定要打包的文件或目录列表。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- z：有gzip属性的</span><br><span class="line">- j：有bz2属性的</span><br><span class="line">- Z：有compress属性的</span><br><span class="line">- v：显示所有过程</span><br><span class="line">- O：将文件解开到标准输出</span><br></pre></td></tr></table></figure>
+<p>下面的参数-f是必须的</p>
+<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tar -cf all.tar *.jpg</span><br><span class="line"><span class="comment"># 这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包，-f指定包的文件名。</span></span><br><span class="line"></span><br><span class="line">tar -rf all.tar *.gif</span><br><span class="line"><span class="comment"># 这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的意思。</span></span><br><span class="line"></span><br><span class="line">tar -uf all.tar logo.gif</span><br><span class="line"><span class="comment"># 这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</span></span><br><span class="line"></span><br><span class="line">tar -tf all.tar</span><br><span class="line"><span class="comment"># 这条命令是列出all.tar包中所有文件，-t是列出文件的意思</span></span><br></pre></td></tr></table></figure>
+<h3 id="zip格式"><a href="#zip格式" class="headerlink" title="zip格式"></a>zip格式</h3><p>压缩： zip -r [目标文件名].zip [原文件&#x2F;目录名]<br/>解压： unzip [原文件名].zip<br/>注：-r参数代表递归</p>
+<h3 id="tar格式（该格式仅仅打包，不压缩）"><a href="#tar格式（该格式仅仅打包，不压缩）" class="headerlink" title="tar格式（该格式仅仅打包，不压缩）"></a>tar格式（该格式仅仅打包，不压缩）</h3><p>打包：tar -cvf [目标文件名].tar [原文件名&#x2F;目录名]<br/>解包：tar -xvf [原文件名].tar<br/>注：c参数代表create（创建），x参数代表extract（解包），v参数代表verbose（详细信息），f参数代表filename（文件名），所以f后必须接文件名。</p>
+<h3 id="tar-gz格式"><a href="#tar-gz格式" class="headerlink" title="tar.gz格式"></a>tar.gz格式</h3><p>方式一：利用前面已经打包好的tar文件，直接用压缩命令。</p>
+<p>压缩：gzip [原文件名].tar<br/>解压：gunzip [原文件名].tar.gz</p>
+<p>方式二：一次性打包并压缩、解压并解包</p>
+<p>打包并压缩： tar -zcvf [目标文件名].tar.gz [原文件名&#x2F;目录名]<br/>解压并解包： tar -zxvf [原文件名].tar.gz<br/>注：z代表用gzip算法来压缩&#x2F;解压。</p>
+<h3 id="tar-bz2格式"><a href="#tar-bz2格式" class="headerlink" title="tar.bz2格式"></a>tar.bz2格式</h3><p>方式一：利用已经打包好的tar文件，直接执行压缩命令：</p>
+<p>压缩：bzip2 [原文件名].tar<br/>解压：bunzip2 [原文件名].tar.bz2<br/>方式二：一次性打包并压缩、解压并解包</p>
+<p>打包并压缩： tar -jcvf [目标文件名].tar.bz2 [原文件名&#x2F;目录名]<br/>解压并解包： tar -jxvf [原文件名].tar.bz2<br/>注：小写j代表用bzip2算法来压缩&#x2F;解压。</p>
+<h3 id="tar-xz格式"><a href="#tar-xz格式" class="headerlink" title="tar.xz格式"></a>tar.xz格式</h3><p>方式一：利用已经打包好的tar文件，直接用压缩命令：</p>
+<p>压缩：xz [原文件名].tar<br/>解压：unxz [原文件名].tar.xz<br/>方式二：一次性打包并压缩、解压并解包</p>
+<p>打包并压缩： tar -Jcvf [目标文件名].tar.xz [原文件名&#x2F;目录名]<br/>解压并解包： tar -Jxvf [原文件名].tar.xz<br/>注：大写J代表用xz算法来压缩&#x2F;解压。</p>
+<h3 id="tar-Z格式（已过时）"><a href="#tar-Z格式（已过时）" class="headerlink" title="tar.Z格式（已过时）"></a>tar.Z格式（已过时）</h3><p>方式一：利用已经打包好的tar文件，直接用压缩命令：</p>
+<p>压缩：compress [原文件名].tar<br/>解压：uncompress [原文件名].tar.Z<br/>方式二：一次性打包并压缩、解压并解包</p>
+<p>打包并压缩： tar -Zcvf [目标文件名].tar.Z [原文件名&#x2F;目录名]<br/>解压并解包： tar -Zxvf [原文件名].tar.Z<br/>注：大写Z代表用ncompress算法来压缩&#x2F;解压。另，ncompress是早期Unix系统的压缩格式，但由于ncompress的压缩率太低，现已过时。</p>
+<h3 id="jar格式"><a href="#jar格式" class="headerlink" title="jar格式"></a>jar格式</h3><p>压缩：jar -cvf [目标文件名].jar [原文件名&#x2F;目录名]<br/>解压：jar -xvf [原文件名].jar<br/>注：如果是打包的是Java类库，并且该类库中存在主类，那么需要写一个META-INF&#x2F;MANIFEST.MF配置文件，内容如下：</p>
+<p>Manifest-Version: 1.0<br/>Created-By: 1.6.0_27 (Sun Microsystems Inc.)<br/>Main-class: the_name_of_the_main_class_should_be_put_here<br/>然后用如下命令打包：</p>
+<p>jar -cvfm [目标文件名].jar META-INF&#x2F;MANIFEST.MF [原文件名&#x2F;目录名]<br/>这样以后就能用“java -jar [文件名].jar”命令直接运行主类中的public static void main方法了。</p>
+<h3 id="7z格式"><a href="#7z格式" class="headerlink" title="7z格式"></a>7z格式</h3><p>压缩：7z a [目标文件名].7z [原文件名&#x2F;目录名]<br/>解压：7z x [原文件名].7z<br/>注：这个7z解压命令支持rar格式，即：</p>
+<p>7z x [原文件名].rar</p>
+<h3 id="其它例子"><a href="#其它例子" class="headerlink" title="其它例子"></a>其它例子</h3><p> <strong>将文件全部打包成tar包</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf log.tar log2012.log    仅打包，不压缩！</span><br><span class="line">tar -zcvf log.tar.gz log2012.log   打包后，以 gzip 压缩</span><br><span class="line">tar -jcvf log.tar.bz2 log2012.log  打包后，以 bzip2 压缩</span><br></pre></td></tr></table></figure>
+<p>在选项<code>f</code>之后的文件档名是自己取的，我们习惯上都用 .tar 来作为辨识。 如果加<code>z</code>选项，则以.tar.gz或.tgz来代表gzip压缩过的tar包；如果加<code>j</code>选项，则以.tar.bz2来作为tar包名。</p>
+<p> <strong>查阅上述tar包内有哪些文件</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -ztvf log.tar.gz</span><br></pre></td></tr></table></figure>
+<p>由于我们使用 gzip 压缩的log.tar.gz，所以要查阅log.tar.gz包内的文件时，就得要加上<code>z</code>这个选项了。</p>
+<p> <strong>将tar包解压缩</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf /opt/soft/test/log.tar.gz</span><br></pre></td></tr></table></figure>
+<p>在预设的情况下，我们可以将压缩档在任何地方解开的</p>
+<p> <strong>只将tar内的部分文件解压出来</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf /opt/soft/test/log30.tar.gz log2013.log</span><br></pre></td></tr></table></figure>
+<p>我可以透过<code>tar -ztvf</code>来查阅 tar 包内的文件名称，如果单只要一个文件，就可以透过这个方式来解压部分文件！</p>
+<p> <strong>文件备份下来，并且保存其权限</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvpf log31.tar.gz log2014.log log2015.log log2016.log</span><br></pre></td></tr></table></figure>
+<p>这个<code>-p</code>的属性是很重要的，尤其是当您要保留原本文件的属性时。</p>
+<p> <strong>在文件夹当中，比某个日期新的文件才备份</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -N &quot;2012/11/13&quot; -zcvf log17.tar.gz test</span><br></pre></td></tr></table></figure>
+<p> <strong>备份文件夹内容是排除部分文件：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar --exclude scf/service -zcvf scf.tar.gz scf/*</span><br></pre></td></tr></table></figure>
+<p> <strong>其实最简单的使用 tar 就只要记忆底下的方式即可：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">压　缩：tar -jcv -f filename.tar.bz2 要被压缩的文件或目录名称</span><br><span class="line">查　询：tar -jtv -f filename.tar.bz2</span><br><span class="line">解压缩：tar -jxv -f filename.tar.bz2 -C 欲解压缩的目录</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>阿童木
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://atompi.github.io/2018/02/01/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-33/" title="每天一个 Linux 命令（33） -- tar">https://atompi.github.io/2018/02/01/每天一个Linux命令-33/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/31/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-32/" rel="prev" title="每天一个 Linux 命令（32） -- bunzip2">
+                  <i class="fa fa-angle-left"></i> 每天一个 Linux 命令（32） -- bunzip2
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/01/MySQL%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/" rel="next" title="MySQL权限管理">
+                  MySQL权限管理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2022004779号-1 </a>
+      <img src="/images/site/gongan.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=43112602000244" rel="noopener" target="_blank">湘公网安备 43112602000244 号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">阿童木</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/atompi" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

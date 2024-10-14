@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/site/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"atompi.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Some old articles may have been deprecated.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每天一个 Linux 命令（18） -- sort">
+<meta property="og:url" content="https://atompi.github.io/2018/01/17/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-18/index.html">
+<meta property="og:site_name" content="atompi">
+<meta property="og:description" content="Some old articles may have been deprecated.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-01-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-14T23:42:55.529Z">
+<meta property="article:author" content="阿童木">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://atompi.github.io/2018/01/17/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-18/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://atompi.github.io/2018/01/17/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-18/","path":"2018/01/17/每天一个Linux命令-18/","title":"每天一个 Linux 命令（18） -- sort"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>每天一个 Linux 命令（18） -- sort | atompi</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="atompi" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/images/site/logo.svg" alt="atompi">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">atompi</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">补充说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">实例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿童木"
+      src="/images/site/avatar.jpg">
+  <p class="site-author-name" itemprop="name">阿童木</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/atompi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7573893/atompi" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7573893&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://atompi.github.io/2018/01/17/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/site/avatar.jpg">
+      <meta itemprop="name" content="阿童木">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="atompi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="每天一个 Linux 命令（18） -- sort | atompi">
+      <meta itemprop="description" content="Some old articles may have been deprecated.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          每天一个 Linux 命令（18） -- sort
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-18 00:00:00" itemprop="dateCreated datePublished" datetime="2018-01-18T00:00:00+08:00">2018-01-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-15 07:42:55" itemprop="dateModified" datetime="2024-10-15T07:42:55+08:00">2024-10-15</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Some old articles may have been deprecated.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>将文件进行排序并输出</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p><strong>sort命令</strong> 是在 Linux 里非常有用，它将文件进行排序，并将排序结果标准输出。sort 命令既可以从特定的文件，也可以从 stdin 中获取输入。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort (选项) (参数)</span><br></pre></td></tr></table></figure>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-b：忽略每行前面开始出的空格字符；</span><br><span class="line">-c：检查文件是否已经按照顺序排序；</span><br><span class="line">-d：排序时，处理英文字母、数字及空格字符外，忽略其他的字符；</span><br><span class="line">-f：排序时，将小写字母视为大写字母；</span><br><span class="line">-i：排序时，除了040至176之间的ASCII字符外，忽略其他的字符；</span><br><span class="line">-m：将几个排序号的文件进行合并；</span><br><span class="line">-M：将前面3个字母依照月份的缩写进行排序；</span><br><span class="line">-n：依照数值的大小排序；</span><br><span class="line">-o&amp;lt;输出文件&amp;gt;：将排序后的结果存入制定的文件；</span><br><span class="line">-r：以相反的顺序来排序；</span><br><span class="line">-t&amp;lt;分隔字符&amp;gt;：指定排序时所用的栏位分隔字符；</span><br><span class="line">+&amp;lt;起始栏位&amp;gt;-&amp;lt;结束栏位&amp;gt;：以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</span><br></pre></td></tr></table></figure>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>文件：指定待排序的文件列表。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>sort将文件&#x2F;文本的每一行作为一个单位，相互比较，比较原则是从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root@[mail text]# cat sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">[root@mail text]# sort sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">bbb:20:2.2</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br></pre></td></tr></table></figure>
+<p>忽略相同行使用-u选项或者uniq：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@mail text]# cat sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">[root@mail text]# sort -u sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">bbb:20:2.2</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">eee:50:5.5</span><br><span class="line"></span><br><span class="line">或者</span><br><span class="line"></span><br><span class="line">[root@mail text]# uniq sort.txt</span><br><span class="line">aaa:10:1.1</span><br><span class="line">ccc:30:3.3</span><br><span class="line">ddd:40:4.4</span><br><span class="line">bbb:20:2.2</span><br><span class="line">eee:50:5.5</span><br></pre></td></tr></table></figure>
+<p>sort的-n、-r、-k、-t选项的使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">[root@mail text]# cat sort.txt</span><br><span class="line">AAA:BB:CC</span><br><span class="line">aaa:30:1.6</span><br><span class="line">ccc:50:3.3</span><br><span class="line">ddd:20:4.2</span><br><span class="line">bbb:10:2.5</span><br><span class="line">eee:40:5.4</span><br><span class="line">eee:60:5.1</span><br><span class="line"></span><br><span class="line">#将BB列按照数字从小到大顺序排列：</span><br><span class="line">[root@mail text]# sort -nk 2 -t: sort.txt</span><br><span class="line">AAA:BB:CC</span><br><span class="line">bbb:10:2.5</span><br><span class="line">ddd:20:4.2</span><br><span class="line">aaa:30:1.6</span><br><span class="line">eee:40:5.4</span><br><span class="line">ccc:50:3.3</span><br><span class="line">eee:60:5.1</span><br><span class="line"></span><br><span class="line">#将CC列数字从大到小顺序排列：</span><br><span class="line">[root@mail text]# sort -nrk 3 -t: sort.txt</span><br><span class="line">eee:40:5.4</span><br><span class="line">eee:60:5.1</span><br><span class="line">ddd:20:4.2</span><br><span class="line">ccc:50:3.3</span><br><span class="line">bbb:10:2.5</span><br><span class="line">aaa:30:1.6</span><br><span class="line">AAA:BB:CC</span><br><span class="line"></span><br><span class="line"># -n是按照数字大小排序，-r是以相反顺序，-k是指定需要爱排序的栏位，-t指定栏位分隔符为冒号</span><br></pre></td></tr></table></figure>
+<p> <strong>-k选项的具体语法格式：</strong></p>
+<p>-k选项的语法格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FStart.CStart Modifie,FEnd.CEnd Modifier</span><br><span class="line">-------Start--------,-------End--------</span><br><span class="line"> FStart.CStart 选项  ,  FEnd.CEnd 选项</span><br></pre></td></tr></table></figure>
+<p>这个语法格式可以被其中的逗号<code>,</code>分为两大部分， <strong>Start</strong> 部分和 <strong>End</strong> 部分。Start部分也由三部分组成，其中的Modifier部分就是我们之前说过的类似n和r的选项部分。我们重点说说<code>Start</code>部分的<code>FStart</code>和<code>C.Start</code>。<code>C.Start</code>也是可以省略的，省略的话就表示从本域的开头部分开始。<code>FStart.CStart</code>，其中<code>FStart</code>就是表示使用的域，而<code>CStart</code>则表示在<code>FStart</code>域中从第几个字符开始算“排序首字符”。同理，在End部分中，你可以设定<code>FEnd.CEnd</code>，如果你省略<code>.CEnd</code>，则表示结尾到“域尾”，即本域的最后一个字符。或者，如果你将CEnd设定为0(零)，也是表示结尾到“域尾”。</p>
+<p>从公司英文名称的第二个字母开始进行排序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t &#x27; &#x27; -k 1.2 facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<p>使用了 <code>-k 1.2</code> ，表示对第一个域的第二个字符开始到本域的最后一个字符为止的字符串进行排序。你会发现 baidu 因为第二个字母是 a 而名列榜首。sohu 和 google 第二个字符都是o，但 sohu 的h 在 google 的 o 前面，所以两者分别排在第二和第三。guge 只能屈居第四了。</p>
+<p>只针对公司英文名称的第二个字母进行排序，如果相同的按照员工工资进行降序排序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t &#x27; &#x27; -k 1.2,1.2 -nrk 3,3 facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<p>由于只对第二个字母进行排序，所以我们使用了 <code>-k 1.2,1.2</code> 的表示方式，表示我们 “只” 对第二个字母进行排序。（如果你问“我使用 <code>-k 1.2</code> 怎么不行 ？”，当然不行，因为你省略了End部分，这就意味着你将对从第二个字母起到本域最后一个字符为止的字符串进行排序）。对于员工工资进行排 序，我们也使用了 <code>-k 3,3</code>，这是最准确的表述，表示我们“只”对本域进行排序，因为如果你省略了后面的 3，就变成了我们 “对第 3 个域开始到最后一个域位置的内容进行排序” 了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>阿童木
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://atompi.github.io/2018/01/17/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-18/" title="每天一个 Linux 命令（18） -- sort">https://atompi.github.io/2018/01/17/每天一个Linux命令-18/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/16/%E6%AF%8F%E5%A4%A9%E4%B8%80%E4%B8%AALinux%E5%91%BD%E4%BB%A4-17/" rel="prev" title="每天一个 Linux 命令（17） -- cut">
+                  <i class="fa fa-angle-left"></i> 每天一个 Linux 命令（17） -- cut
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/01/17/Docker%E7%BB%99%E6%AD%A3%E5%9C%A8%E8%BF%90%E8%A1%8C%E7%9A%84%E5%AE%B9%E5%99%A8%E6%98%A0%E5%B0%84%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%AB%AF%E5%8F%A3/" rel="next" title="Docker给正在运行的容器映射宿主机端口">
+                  Docker给正在运行的容器映射宿主机端口 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2022004779号-1 </a>
+      <img src="/images/site/gongan.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=43112602000244" rel="noopener" target="_blank">湘公网安备 43112602000244 号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">阿童木</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/atompi" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/site/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/site/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/site/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"atompi.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Some old articles may have been deprecated.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Compose 安装 Jenkins">
+<meta property="og:url" content="https://atompi.github.io/2020/08/02/DockerCompose%E5%AE%89%E8%A3%85Jenkins/index.html">
+<meta property="og:site_name" content="atompi">
+<meta property="og:description" content="Some old articles may have been deprecated.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-14T23:42:55.528Z">
+<meta property="article:author" content="阿童木">
+<meta property="article:tag" content="Jenkins">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://atompi.github.io/2020/08/02/DockerCompose%E5%AE%89%E8%A3%85Jenkins/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://atompi.github.io/2020/08/02/DockerCompose%E5%AE%89%E8%A3%85Jenkins/","path":"2020/08/02/DockerCompose安装Jenkins/","title":"Docker Compose 安装 Jenkins"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Docker Compose 安装 Jenkins | atompi</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="atompi" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+      <img class="custom-logo-image" src="/images/site/logo.svg" alt="atompi">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">atompi</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-docker-compose"><span class="nav-number">1.</span> <span class="nav-text">安装 docker-compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E5%88%97%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">镜像列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%8C%82%E8%BD%BD%E7%9B%AE%E5%BD%95"><span class="nav-number">3.</span> <span class="nav-text">创建挂载目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-docker-compose-%E9%83%A8%E7%BD%B2-jenkins"><span class="nav-number">4.</span> <span class="nav-text">使用 docker-compose 部署 jenkins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-jenkins"><span class="nav-number">5.</span> <span class="nav-text">配置 jenkins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Gitee-Jenkins-Plugin"><span class="nav-number">6.</span> <span class="nav-text">安装 Gitee Jenkins Plugin</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿童木"
+      src="/images/site/avatar.jpg">
+  <p class="site-author-name" itemprop="name">阿童木</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/atompi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://stackoverflow.com/users/7573893/atompi" title="StackOverflow → https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;7573893&#x2F;atompi" rel="noopener me" target="_blank"><i class="fab fa-stack-overflow fa-fw"></i>StackOverflow</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://atompi.github.io/2020/08/02/DockerCompose%E5%AE%89%E8%A3%85Jenkins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/site/avatar.jpg">
+      <meta itemprop="name" content="阿童木">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="atompi">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Docker Compose 安装 Jenkins | atompi">
+      <meta itemprop="description" content="Some old articles may have been deprecated.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker Compose 安装 Jenkins
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-03T00:00:00+08:00">2020-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-15 07:42:55" itemprop="dateModified" datetime="2024-10-15T07:42:55+08:00">2024-10-15</time>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Some old articles may have been deprecated.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="安装-docker-compose"><a href="#安装-docker-compose" class="headerlink" title="安装 docker-compose"></a>安装 docker-compose</h2><p>前往 <code>https://github.com/docker/compose/releases</code> 下载对应的 docker-compose 二进制可执行文件</p>
+<p>将 docker-compose 移动至 <code>/usr/local/bin/</code> 目录下，并赋予可执行权限</p>
+<h2 id="镜像列表"><a href="#镜像列表" class="headerlink" title="镜像列表"></a>镜像列表</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jenkins/jenkins:lts</span><br><span class="line">nginx:1.16.1</span><br><span class="line">docker:19.03.12-dind</span><br></pre></td></tr></table></figure>
+<h2 id="创建挂载目录"><a href="#创建挂载目录" class="headerlink" title="创建挂载目录"></a>创建挂载目录</h2><p>为了持久化 CI 数据，我们需要将 jenkins 部分目录挂载到宿主机保存，如在 <code>/data</code> 目录下创建如下目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/atompi-ci/jenkins</span><br><span class="line">chown -R 1000:1000 /data/atompi-ci/jenkins</span><br><span class="line">mkdir -p /data/atompi-ci/nginx/conf.d</span><br><span class="line">mkdir -p /data/atompi-ci/nginx/logs</span><br><span class="line">mkdir -p /data/atompi-ci/nginx/ssl</span><br><span class="line">mkdir -p /data/atompi-ci/docker/data</span><br><span class="line">mkdir -p /data/atompi-ci/docker/etc</span><br></pre></td></tr></table></figure>
+<p><strong>PS: 由于 jenkins images 在 使用 Dockerfile 构建时，默认 UID 为 1000 ，所以在挂载 jenkins home 目录时需要将宿主机目录 UID 设置为 1000 ，或者修改 docker-compose.yml 将 jenkins 容器用户修改为 root ，这里使用了修改 docker-compose.yml 的方式，出于安全考虑，建议修改宿主机目录 UID ，如： <code>chown -R 1000:1000 /data/atompi-ci/jenkins</code></strong></p>
+<h2 id="使用-docker-compose-部署-jenkins"><a href="#使用-docker-compose-部署-jenkins" class="headerlink" title="使用 docker-compose 部署 jenkins"></a>使用 docker-compose 部署 jenkins</h2><p>创建 <code>~/atompi-ci/</code> 目录并创建 <code>docker-compose.yml</code> 文件，文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3.8&#x27;</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  jenkins:</span><br><span class="line">    image: jenkins/jenkins:lts</span><br><span class="line">    environment:</span><br><span class="line">      - JAVA_OPTS=-Duser.timezone=Asia/Shanghai</span><br><span class="line">    volumes:</span><br><span class="line">      - /data/atompi-ci/jenkins:/var/jenkins_home</span><br><span class="line">    ports:</span><br><span class="line">      - 8080:8080</span><br><span class="line">  nginx:</span><br><span class="line">    image: nginx:1.16.1</span><br><span class="line">    ports:</span><br><span class="line">      - 80:80</span><br><span class="line">    volumes:</span><br><span class="line">      - /data/atompi-ci/nginx/conf.d:/etc/nginx/conf.d</span><br><span class="line">      - /data/atompi-ci/nginx/logs:/var/log/nginx</span><br><span class="line">      - /data/atompi-ci/nginx/ssl:/etc/nginx/ssl</span><br><span class="line">  docker:</span><br><span class="line">    image: docker:19.03.12-dind</span><br><span class="line">    privileged: true</span><br><span class="line">    environment:</span><br><span class="line">      - DOCKER_TLS_CERTDIR=</span><br><span class="line">    volumes:</span><br><span class="line">      - /data/atompi-ci/docker/data:/var/lib/docker</span><br><span class="line">      - /data/atompi-ci/docker/etc:/etc/docker</span><br></pre></td></tr></table></figure>
+<p>创建 <code>/data/atompi-ci/nginx/conf.d/jenkins.conf</code> 文件，该文件为 Jenkins 的 Nginx 反向代理配置文件，如果不需要同时安装 Nginx 可以跳过，并注释掉 <code>docker-compose.yml</code> 中的 nginx 部分，文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">client_max_body_size 0;</span><br><span class="line">upstream jenkins &#123;</span><br><span class="line">  keepalive 32; # keepalive connections</span><br><span class="line">  server jenkins:8080; # jenkins ip and port</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name ci.atompi.cc;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://jenkins;</span><br><span class="line">        proxy_redirect $scheme://ci.atompi.cc $scheme://ci.atompi.com:8888;</span><br><span class="line">        proxy_read_timeout 90;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行部署命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h2 id="配置-jenkins"><a href="#配置-jenkins" class="headerlink" title="配置 jenkins"></a>配置 jenkins</h2><p>初始化 jenkins</p>
+<p>浏览器打开我们在 nginx 配置文件中设置的域名，如: <a target="_blank" rel="noopener" href="http://ci.atompi.cc/">http://ci.atompi.cc</a></p>
+<p>查看初始密码，在 jenkins 目录下 使用 docker-compose 命令查看 jenkins 日志，或者进入 jenkins 容器查看文件： <code>/var/jenkins_home/secrets/initialAdminPassword</code> （注意：初始化完成后，这个文件会消失）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看日志</span><br><span class="line"># docker-compose logs jenkins</span><br><span class="line"># 进入容器</span><br><span class="line"># docker-compose exec jenkins bash</span><br><span class="line"># cat /var/jenkins_home/secrets/initialAdminPassword</span><br></pre></td></tr></table></figure>
+<p>输入初始密码后进入插件安装界面，我们选择“安装推荐插件”。</p>
+<p>去喝杯茶？</p>
+<p>插件安装完成后，创建第一个管理员用户</p>
+<p>选择保存并完成，之后进入确认 Jenkins URL 页面</p>
+<p>初始化完成，开始使用 jenkins</p>
+<p>进入 jenkins 首页</p>
+<h2 id="安装-Gitee-Jenkins-Plugin"><a href="#安装-Gitee-Jenkins-Plugin" class="headerlink" title="安装 Gitee Jenkins Plugin"></a>安装 Gitee Jenkins Plugin</h2><ol>
+<li>在线安装</li>
+</ol>
+<p>管理员登录 jenkins ，进入： 系统管理 –&gt; 管理插件 –&gt; 可选插件，在插件搜索栏输入“ Gitee ”，即可在下方可选列表中勾选“ Gitee ”。选择“下载待重启后安装”即可在重启 Jenkins 后完成安装。</p>
+<ol>
+<li>上传插件 hpi 文件安装</li>
+</ol>
+<p>从 <a target="_blank" rel="noopener" href="https://gitee.com/oschina/Gitee-Jenkins-Plugin/releases">release</a> 列表中进入最新发行版，下载对应的 <code>gitee-&lt;version&gt;.hpi&lt;/version&gt;</code> 文件</p>
+<p>进入：系统管理 –&gt; 管理插件 –&gt; 高级，在“上传插件”处上传 hpi 文件</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gitee.com/oschina/Gitee-Jenkins-Plugin#%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE">Gitee Jenkins Plugin 使用文档</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>阿童木
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://atompi.github.io/2020/08/02/DockerCompose%E5%AE%89%E8%A3%85Jenkins/" title="Docker Compose 安装 Jenkins">https://atompi.github.io/2020/08/02/DockerCompose安装Jenkins/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Jenkins/" rel="tag"># Jenkins</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/08/02/%E4%BD%BF%E7%94%A8CoreDNS%E4%BD%9C%E4%B8%BA%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E5%86%85%E7%BD%91DNS%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="使用 CoreDNS 作为数据中心内网 DNS 服务器">
+                  <i class="fa fa-angle-left"></i> 使用 CoreDNS 作为数据中心内网 DNS 服务器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/02/22/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85Harbor_v2/" rel="next" title="离线安装 Harbor v2">
+                  离线安装 Harbor v2 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">湘ICP备2022004779号-1 </a>
+      <img src="/images/site/gongan.png" alt=""><a href="https://beian.mps.gov.cn/#/query/webSearch?code=43112602000244" rel="noopener" target="_blank">湘公网安备 43112602000244 号 </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">阿童木</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/atompi" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
